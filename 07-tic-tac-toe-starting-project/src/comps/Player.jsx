@@ -1,14 +1,19 @@
 import { useState } from "react";
 
-const Player = ({ initialName, symbol, isActive}) => {
+const Player = ({ initialName, symbol, isActive, changePlayerName}) => {
 
     const [isEditing, setIsEditing] = useState(false);
-    const [playerName, setPlayerName] = useState(initialName)
-    const handleEditing = () => {
+    const [playerName, setPlayerName] = useState(initialName);
+
+    const handleEditing = (e) => {
         setIsEditing(prev => !prev);
+    
+        if(isEditing){
+            changePlayerName(symbol, playerName)
+        };
+
     }
 
-   
     return (
         <li className={isActive ? 'active' : undefined}>
             <span className="player">
