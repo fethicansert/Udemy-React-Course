@@ -1,33 +1,9 @@
 import { useEffect, useState } from "react";
 import Input from "./Input";
 import InputGroup from "./InputGroup";
-import { calculateInvestmentResults } from "../util/investment";
-const UserInput = ({ }) => {
-
-    const [userInput, setUserInput] = useState({
-        initialInvestment: 1000,
-        annualInvestment: 1200,
-        expectedReturn: 6,
-        duration: 10
-    });
-
-    function handleChange(inputIdentifier, newValue) {
-        console.log(inputIdentifier, newValue);
-        
-        setUserInput(prev => ({...prev, [inputIdentifier]:newValue}))
-    }
+const UserInput = ({ userInput, handleChange }) => {
 
 
-    useEffect(() => {
-        const result = calculateInvestmentResults(
-            parseInt(userInput.initialInvestment),
-            parseInt(userInput.annualInvestment),
-            parseInt(userInput.expectedReturn),
-            parseInt(userInput.duration));
-        console.log(result);
-
-
-    }, [userInput])
     return (
         <div id="user-input">
 
