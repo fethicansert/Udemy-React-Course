@@ -1,0 +1,130 @@
+@import url('https://fonts.googleapis.com/css2?family=Mochiy+Pop+One&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Mochiy+Pop+One&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: "Mochiy Pop One", sans-serif;
+    background: #FBD3E9;
+    background: -webkit-linear-gradient(to right, #BB377D, #FBD3E9);
+    background: linear-gradient(to right, #BB377D, #FBD3E9);
+}
+
+.container{
+    height: 100vh;
+    padding: 2rem;
+}
+
+.container.blur{
+    filter: blur(3px);
+}
+
+.header {
+    color: white;
+    text-align: center;
+    font-size: 2.3rem;
+}
+
+.show-popup-btn {
+    font-family: "Montserrat", sans-serif;
+    font-size: 1rem;
+    border-radius: 25px;
+    padding: 1.2rem 2.5rem;
+    border: none;
+    box-shadow: 1px 1px 3px rgba(0, 0, 0, .35);
+    font-weight: 600;
+    cursor: pointer;
+    transition: transform 500ms ease;
+}
+
+.show-modal-btn:hover {
+    transform: scale(1.1);
+}
+
+.button-group {
+    margin: 0 auto;
+    width: 80%;
+    margin-top: 3rem;
+    display: flex;
+    justify-content: space-around;
+    max-width: 700px;
+}
+
+.overlay {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background: rgba(0, 0, 0, .55);
+    filter: blur(3px);
+}
+
+.overlay.hidden{
+    visibility: hidden;
+}
+
+.popup{
+    z-index: 99;
+    position: absolute;
+    top: 30%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 450px;
+    background: white;
+    padding: 1rem;
+    height: 500px;
+    overflow-y: scroll;
+    box-shadow: 1px 1px 3px rgba(0, 0, 0, .5);
+    border-radius: 10px;
+    transform-origin: left;
+    animation: popupAnimation 800ms ease;
+}
+
+.popup.hidden{
+    display: none;
+}
+
+.popup::-webkit-scrollbar {
+    display: none;
+  }
+
+.popup button{
+    position: absolute;
+    right: 0;
+    margin-right: 1rem;
+    border: none;
+    font-size: 2rem;
+    background: transparent;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.popup img{
+    margin-top: 1.5rem;
+    width: 100%;
+}
+
+.popup p{
+    margin-top: .5rem;
+    font-size: .9rem;
+    color: rgba(0, 0, 0, 0.75);
+}
+
+@keyframes popupAnimation {
+    0%{
+        scale: 0;
+    }
+
+    70%{
+        scale: 1.1;
+    }
+
+    100%{
+        scale: 1;
+    }
+}
