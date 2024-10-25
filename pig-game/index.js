@@ -7,8 +7,8 @@ const newGameBtn = document.querySelector('.new-game-btn');
 const rollDiceBtn = document.querySelector('.roll-dice-btn');
 const holdBtn = document.querySelector('.hold-btn');
 
-const player0 = document.querySelector('.player--0')
-const player1 = document.querySelector('.player--1')
+
+const players = document.querySelectorAll('.player')
 
 const currentScore0El = document.getElementById('current-score-0');
 const currentScore1El = document.getElementById('current-score-1');
@@ -16,7 +16,7 @@ const currentScore1El = document.getElementById('current-score-1');
 let currentScore0 = 0;
 let currentScore1 = 0;
 
-let currentPlayer = player0;
+let currentPlayer = 0;
 let score = 0;
 
 
@@ -27,24 +27,24 @@ newGameBtn.addEventListener('click', newGame);
 
 //FUNCTIONS
 function rollDice() {
-    const randonNumber = Math.floor(Math.random() * 5);
+    //Generate random dice number between 1-6
+    const dice = Math.trunc(Math.random() * 6) + 1;
 
-    if (randonNumber === 0) return rollDice();
-
+    //Display Dice
     diceEl.classList.remove('hidden');
+    diceEl.src = `./dice/dice-six-faces-${dice}.png`;
 
-    if (randonNumber === 1) {
-        changePlayer();
+    if (dice !== 1) {
+        score += dice;
+        document.getElementById(`score--${currentPlayer}`).textContent = score;
     } else {
-        score = score + randonNumber;
-        currentPlayer === player0 ?
-            score0El.textContent = score : score1El.textContent = score;
+        changePlayer();
     }
-    diceEl.src = `./dice/dice-six-faces-${randonNumber}.png`;
+    
 }
 
 function holdScore() {
-    if (currentPlayer === player0) {
+    if (currentPlayer === 0) {
         currentScore0El.textContent = score + parseInt(currentScore0El.textContent);
     } else {
         currentScore1El.textContent = score + parseInt(currentScore1El.textContent);
@@ -62,9 +62,8 @@ function newGame() {
 
 function changePlayer() {
     score = 0;
-    currentPlayer === player0 ?
-        score0El.textContent = score : score1El.textContent = score;
-    currentPlayer.classList.remove('player-active');
-    currentPlayer = currentPlayer === player0 ? player1 : player0;
-    currentPlayer.classList.add('player-active');
+    document.getElementById(`score--${currentPlayer}`).textContent = 0;
+    players[0].classList.toggle('player-active');
+    players[1].classList.toggle('player-active');
+    currentPlayer = currentPlayer === 0 ? 1 : 0;
 }
