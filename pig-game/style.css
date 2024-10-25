@@ -42,13 +42,34 @@ body {
     background: #de84fa;
 }
 
+.player-winner{
+    background: white;
+}
+
+.name-winner{
+    color: #84fab0;
+}
+
 .player h2 {
     font-size: 2.3rem;
     text-transform: uppercase;
     height: 25%;
 }
 
+.winner-text{
+    position: absolute;
+    top: -85%;
+    font-weight: 600;
+    color: white;
+    text-decoration:underline;
+}
+
+.winner-text.hidden{
+    display: none;
+}
+
 .score-box {
+    position: relative;
     width: 60%;
     border-radius: 10px;
     display: flex;

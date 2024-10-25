@@ -34,30 +34,35 @@ function rollDice() {
     diceEl.classList.remove('hidden');
     diceEl.src = `./dice/dice-six-faces-${dice}.png`;
 
+    //if dice 1 change player else add score to current score
     if (dice !== 1) {
         score += dice;
         document.getElementById(`score--${currentPlayer}`).textContent = score;
-    } else {
-        changePlayer();
-    }
-    
+    } else changePlayer();
 }
 
 function holdScore() {
-    if (currentPlayer === 0) {
-        currentScore0El.textContent = score + parseInt(currentScore0El.textContent);
-    } else {
-        currentScore1El.textContent = score + parseInt(currentScore1El.textContent);
-    }
-    changePlayer();
+    //add current score to current player
+    const currentScore = document.getElementById(`current-score-${currentPlayer}`);
+    const intCurrentScore = parseInt(currentScore.textContent) + score;
+    console.log(intCurrentScore);
+    
+    currentScore.textContent = intCurrentScore;
+    intCurrentScore >= 10 ? finishGame() : changePlayer();
 }
 
 function newGame() {
+    //reset the game
     score = 0;
     currentScore0El.textContent = 0;
     currentScore1El.textContent = 0;
     score0El.textContent = 0;
     score1El.textContent = 0;
+    document.getElementById(`name--${currentPlayer}`).classList.remove('name-winner');
+    document.querySelector(`.winner--text--${currentPlayer}`).classList.add('hidden');
+    rollDiceBtn.removeAttribute('disabled');
+    holdBtn.removeAttribute('disabled');
+    diceEl.classList.add('hidden');
 }
 
 function changePlayer() {
@@ -66,4 +71,11 @@ function changePlayer() {
     players[0].classList.toggle('player-active');
     players[1].classList.toggle('player-active');
     currentPlayer = currentPlayer === 0 ? 1 : 0;
+}
+
+function finishGame(){
+    document.getElementById(`name--${currentPlayer}`).classList.add('name-winner');
+    document.querySelector(`.winner--text--${currentPlayer}`).classList.remove('hidden');
+    rollDiceBtn.setAttribute("disabled", "true");
+    holdBtn.setAttribute("disabled","true");
 }
